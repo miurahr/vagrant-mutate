@@ -122,7 +122,9 @@ module VagrantMutate
 
         # p for progress bar
         # S for sparse file
+        # c for compress(supporeted by qcow/qcow2)
         qemu_options = '-p -S 16k'
+        qemu_options += ' -c' if output_format == 'qcow2'
 
         command = "qemu-img convert #{qemu_options} -f #{input_format} -O #{output_format} #{input_file} #{output_file}"
         @logger.info "Running #{command}"
